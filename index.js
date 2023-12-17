@@ -1,21 +1,20 @@
 const express = require("express");
 const app = express();
 const port = 5000;
+let dotenv = require("dotenv").config();
+//console.log(dotenv.parsed);
+const { MONGO_USER, MONGO_PASS } = dotenv.parsed;
 
 app.use(express.json());
 
-const cors = require('cors') 
-app.use(cors())
-
-
-
-
+const cors = require("cors");
+app.use(cors());
 
 //connect mongodb
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    "mongodb+srv://tanzimnahid6:pzInYUaN0bMm8b4l@cluster0.vejx43y.mongodb.net/jobFinder?retryWrites=true&w=majority"
+    `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@cluster0.vejx43y.mongodb.net/jobFinder?retryWrites=true&w=majority`
   )
   .then(() => {
     console.log("Connected to MongoDB");
